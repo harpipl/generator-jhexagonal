@@ -1,0 +1,24 @@
+{
+  "name": "generator-jhexagonal",
+  "version": "1.0.0",
+  "description": "A code generator for SpringBoot applications with Hexagonal Architecture",
+  "keywords": [
+    "yeoman-generator",
+    "yeoman",
+    "java",
+    "hexagonal",
+    "spring-boot",
+    "spring"
+  ],
+  "files": [
+    "generators"
+  ],
+  "main": "index.js",
+  "author": "Harpi <arkadiusz.adamczak@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^5.7.0",
+    "yosay": "^2.0.2",
+    "fs-extra": "^11.1.0"
+  }
+}
