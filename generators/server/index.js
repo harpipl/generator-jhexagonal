@@ -1,5 +1,7 @@
 'use strict';
 
+const Fs = require('fs/promises');
+
 const BaseGenerator = require('../common/base-generator');
 const constants = require('../common/constants');
 const prompts = require('./prompts');
@@ -28,6 +30,8 @@ module.exports = class extends BaseGenerator {
     writing() {
         console.log(this.configOptions)
         this._generateMainMavenPOMs(this.configOptions);
+        this._generateAppMavenPOMs(this.configOptions);
+        this._generateCommonMavenPOMs(this.configOptions);
     }
 
     _generateMainMavenPOMs(configOptions) {
@@ -40,15 +44,74 @@ module.exports = class extends BaseGenerator {
         );
 
         this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'modules/pom.xml'),
+            this.destinationPath('modules/pom.xml'),
+            configOptions
+        )
+    }
+
+    _generateAppMavenPOMs(configOptions) {
+        const tmpMavenDir = "../../common/files/maven/";
+
+        this.fs.copyTpl(
             this.templatePath(tmpMavenDir + 'app/pom.xml'),
             this.destinationPath('app/pom.xml'),
             configOptions
         );
 
         this.fs.copyTpl(
-            this.templatePath(tmpMavenDir + 'modules/pom.xml'),
-            this.destinationPath('modules/pom.xml'),
+            this.templatePath(tmpMavenDir + 'app/src/main/java/Application.java'),
+            this.destinationPath('app/src/main/java/' + configOptions.packageFolder + '/Application.java'),
+            configOptions
+        );
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'app/src/main/resources/application.properties'),
+            this.destinationPath('app/src/main/resources/application.properties'),
+            configOptions
+        );
+
+    }
+
+    _generateCommonMavenPOMs(configOptions) {
+        const tmpMavenDir = "../../common/files/maven/modules/common/";
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'pom.xml'),
+            this.destinationPath('modules/common/pom.xml'),
             configOptions
         )
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'common-app/pom.xml'),
+            this.destinationPath('modules/common/common-app/pom.xml'),
+            configOptions
+        )
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'common-app/src/main/java/SpringBootAutoConfiguration.java'),
+            this.destinationPath('modules/common/common-app/src/main/java/' + configOptions.packageFolder + '/common/app/SpringBootAutoConfiguration.java'),
+            configOptions
+        )
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'common-domain/pom.xml'),
+            this.destinationPath('modules/common/common-domain/pom.xml'),
+            configOptions
+        )
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'common-domain/src/main/java/UseCase.java'),
+            this.destinationPath('modules/common/common-domain/src/main/java/' + configOptions.packageFolder + '/common/domain/UseCase.java'),
+            configOptions
+        )
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'common-infrastructure/pom.xml'),
+            this.destinationPath('modules/common/common-infrastructure/pom.xml'),
+            configOptions
+        )
+
+        Fs.mkdir('modules/common/common-infrastructure/src/main/java/' + configOptions.packageFolder + '/common/infrastructure', { recursive: true });
     }
 }

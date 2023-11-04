@@ -25,7 +25,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <lombok.version><%= LOMBOK_VERSION %></lombok.version>
-        <commons-lang3.version><%= COMMONS_LANG_VERSION %></commons-lang3.version>
+        <commons-lang3.version><%= COMMONS_LANG3_VERSION %></commons-lang3.version>
         <spring-boot.version><%= SPRING_BOOT_VERSION %></spring-boot.version>
         <mapstruct.version><%= MAPSTRUCT_VERSION %></mapstruct.version>
         <lombok-mapstruct.version><%= LOMBOK_MAPSTRUCT_VERSION %></lombok-mapstruct.version>
@@ -38,6 +38,21 @@
             <dependency>
                 <groupId><%= groupId %></groupId>
                 <artifactId>app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId><%= groupId %></groupId>
+                <artifactId>common-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId><%= groupId %></groupId>
+                <artifactId>common-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId><%= groupId %></groupId>
+                <artifactId>common-infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
