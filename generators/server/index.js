@@ -32,6 +32,10 @@ module.exports = class extends BaseGenerator {
         this._generateMainMavenPOMs(this.configOptions);
         this._generateAppMavenPOMs(this.configOptions);
         this._generateCommonMavenPOMs(this.configOptions);
+        
+        for (let i=0; i < this.configOptions.modules.length; i++) {
+            this._generateModuleMavenPOMs(this.configOptions, this.configOptions.modules[i].moduleName);
+        }
     }
 
     _generateMainMavenPOMs(configOptions) {
@@ -113,5 +117,34 @@ module.exports = class extends BaseGenerator {
         )
 
         Fs.mkdir('modules/common/common-infrastructure/src/main/java/' + configOptions.packageFolder + '/common/infrastructure', { recursive: true });
+    }
+
+    _generateModuleMavenPOMs(configOptions, name) {
+        const tmpMavenDir = "../../common/files/maven/modules/module/";
+        configOptions.moduleName = name;
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'pom.xml'),
+            this.destinationPath('modules/' + name + '/pom.xml'),
+            configOptions
+        )
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'module-app/pom.xml'),
+            this.destinationPath('modules/' + name + '/' + name + '-app/pom.xml'),
+            configOptions
+        )
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'module-domain/pom.xml'),
+            this.destinationPath('modules/' + name + '/' + name + '-domain/pom.xml'),
+            configOptions
+        )
+
+        this.fs.copyTpl(
+            this.templatePath(tmpMavenDir + 'module-infrastructure/pom.xml'),
+            this.destinationPath('modules/' + name + '/' + name + '-infrastructure/pom.xml'),
+            configOptions
+        )
     }
 }

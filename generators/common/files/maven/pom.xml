@@ -55,6 +55,23 @@
                 <artifactId>common-infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
+        <% for (let i=0; i < modules.length; i++) { %>
+            <dependency>
+                <groupId><%= groupId %></groupId>
+                <artifactId><%= modules[i].moduleName %>-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId><%= groupId %></groupId>
+                <artifactId><%= modules[i].moduleName %>-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId><%= groupId %></groupId>
+                <artifactId><%= modules[i].moduleName %>-infrastructure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+       <% } %>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
