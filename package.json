@@ -1,6 +1,6 @@
 {
   "name": "generator-jhexagonal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A code generator for SpringBoot applications with Hexagonal Architecture",
   "keywords": [
     "yeoman-generator",
