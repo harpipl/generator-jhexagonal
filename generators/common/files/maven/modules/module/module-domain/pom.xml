@@ -11,4 +11,14 @@
 
     <artifactId><%= moduleName %>-domain</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId><%= groupId %></groupId>
+            <artifactId>common-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 </project>

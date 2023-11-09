@@ -146,5 +146,21 @@ module.exports = class extends BaseGenerator {
             this.destinationPath('modules/' + name + '/' + name + '-infrastructure/pom.xml'),
             configOptions
         )
+
+        Fs.mkdir('modules/' + name + '/' + name + '-app/src/main/java/' + configOptions.packageFolder + '/' + name + '/app/rest/controller', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-app/src/main/java/' + configOptions.packageFolder + '/' + name + '/app/rest/mapper', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-app/src/main/java/' + configOptions.packageFolder + '/' + name + '/app/rest/request', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-app/src/main/java/' + configOptions.packageFolder + '/' + name + '/app/rest/response', { recursive: true });
+
+        Fs.mkdir('modules/' + name + '/' + name + '-domain/src/main/java/' + configOptions.packageFolder + '/' + name + '/domain/model', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-domain/src/main/java/' + configOptions.packageFolder + '/' + name + '/domain/ports/inbound', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-domain/src/main/java/' + configOptions.packageFolder + '/' + name + '/domain/ports/outbound', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-domain/src/main/java/' + configOptions.packageFolder + '/' + name + '/domain/model', { recursive: true });
+
+        Fs.mkdir('modules/' + name + '/' + name + '-infrastructure/src/main/java/' + configOptions.packageFolder + '/' + name + '/infrastructure/databases/mongo', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-infrastructure/src/main/java/' + configOptions.packageFolder + '/' + name + '/infrastructure/databases/postgresql', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-infrastructure/src/main/java/' + configOptions.packageFolder + '/' + name + '/infrastructure/messagebroker/kafka', { recursive: true });
+        Fs.mkdir('modules/' + name + '/' + name + '-infrastructure/src/main/java/' + configOptions.packageFolder + '/' + name + '/infrastructure/messagebroker/rabbitmq', { recursive: true });
+
     }
 }
